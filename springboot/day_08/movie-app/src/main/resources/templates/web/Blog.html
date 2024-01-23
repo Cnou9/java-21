@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/web/css/style.css}">
+</head>
+<body>
+<header class="bg-dark">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://motphimw.com/wp-content/uploads/2023/10/Motphimlogo.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="phimbo.html">Phim bộ </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Phim chiếu rạp</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            The loại
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Phim hoạt hình</a></li>
+                            <li><a class="dropdown-item" href="#">Phim bộ </a></li>
+                            <li><a class="dropdown-item" href="#">Phim lẻ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="py-4">
+    <div class="container">
+        <h3 class="mb-3">Tin tức</h3>
+        <div class="row">
+            <div th:each="b : ${blogData}" class="col-6">
+                <div class="blog-item bg-body-tertiary p-3 rouder mb-4">
+                    <h5 th:text ="${b.title}"> 15 bộ phim Netflix được xem nhiều nhất từ trước tới nay</h5>
+                    <p class="fst-italic" th:text="${b.publishedAt}"> MotphimOctober 8, 2023</p>
+                    <p th:text="${b.content}">15 bộ phim Netflix được xem nhiều nhất từ trước tới nay
+                        Motphim October 8, 2023
+                        Là một trong những dịch vụ xem phim phổ biến và thành công nhất trên thế giới vào lúc này,
+                        Netflix rõ ràng đã biết cách tạo nên tên tuổi cho mình theo năm tháng. Kể từ khi được thành lập
+                        vào năm 1997, Netflix đã phát triển từ dạng dịch vụ cho thuê phim và TV show gửi qua thư tín cho
+                        tới dịch vụ stream dễ tiếp cận mà chúng ta có ngày nay. Vì phổ biến tại nhiều nơi trên thế giới,
+                        Netflix đã trở thành một nền tảng “cần tìm đến” khi mọi người muốn bàn luận, xem phim hoặc TV
+                        show chất lượng cao.</p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4" id="pagination" th:if="${blogData.getTotalPages()>1}">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item " th:classappend="${currentPage==1 ? 'disabled':''} ">
+                        <a class="page-link" th:href="@{/blog (page = ${currentPage -1} )}">Previous</a>
+                    </li>
+                    <li class="page-item"
+                        th:each="pageNumber : ${#numbers.sequence(1, blogData.getTotalPages())}"
+                        th:classappend="${pageNumber == currentPage ? 'active' : ''}">
+                        <a class="page-link" th:href="@{/blog (page=${pageNumber})}" th:text="${pageNumber}">1</a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${currentPage == blogData.getTotalPages() ? 'disabled' : ''}">
+                        <a class="page-link"  th:href="@{/blog ( page=${currentPage + 1})}">2</a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark py-4 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <img src="https://motphimw.com/wp-content/uploads/2023/10/Motphimlogo.png" alt="">
+                <p class="mt-2">Motphim - Trang xem phim trực tuyến miễn phí tại Vietnam.
+                    Tại đây các bạn có thể tìm kiếm những bộ phim mà mình yêu thích với hơn hàng nghìn bộ phim mới được
+                    cập nhật thường xuyên.
+                </p>
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Danh Muc</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim Le </p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Qốc gia</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim Le </p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+            <div class="col-2">
+                <h5 class="text-uppercase mb-3">Thông tin</h5>
+                <p>Phim chieu rap </p>
+                <p>Phim chieu rap </p>
+                <p>Phim lẻ</p>
+                <p>Phim bo </p>
+                <p>Phim TV show </p>
+
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+</html>
