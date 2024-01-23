@@ -114,4 +114,14 @@ public class WebController {
             return "web/Blog-not-found"; // Điều hướng đến trang thông báo không tìm thấy nếu không có phim
         }
     }
+
+    @GetMapping("/dang-ky")
+    public String getDangKyPage() {
+        return "web/dang-ky";
+    }
+
+    @GetMapping("/dang-nhap")
+    public String getDangNhapPage() {
+        return "web/dang-nhap";
+    }
 }
